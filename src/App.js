@@ -1,7 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import './App.css';
-import axios from 'axios';
 import Navbar from './components/layout/Navbar';
 import Users from './components/users/Users';
 import User from './components/users/User';
@@ -11,9 +10,6 @@ import About from './components/pages/About';
 import GithubState from './context/github/GithubState';
 
 const App = () => {
-  const [user, setUser] = useState({});
-  const [repos, setRepos] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [alert, setAlert] = useState(null);
 
   // componentDidMount() {
@@ -47,16 +43,12 @@ const App = () => {
                 render={props => (
                   <Fragment>
                     <Search setAlert={showAlert} />
-                    <Users loading={loading} />
+                    <Users />
                   </Fragment>
                 )}
               />
               <Route exact path='/about' component={About} />
-              <Route
-                exact
-                path='/user/:login'
-                render={props => <User {...props} repos={repos} />}
-              />
+              <Route exact path='/user/:login' component={User} />
             </Switch>
           </div>
         </div>
